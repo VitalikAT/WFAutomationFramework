@@ -33,7 +33,7 @@ public class LoginBO extends BaseBO {
     public LoginBO isLoginSuccessful() {
         info("Verify if 'logout' link has appeared on Main page");
         waitManager.waitTillPageLoaded();
-        assertTrue(mainPage.isLogoutPresent(), "User is not logged in!");
+        assertTrue(mainPage.isLoginPresent(), "User is not logged in!");
         return this;
 
     }
@@ -44,5 +44,10 @@ public class LoginBO extends BaseBO {
         loginPage.act_clickLoginButton();
         return new MainBO();
 
+    }
+
+    public void openPortalLogin(String url) {
+        info("Open portal on Main page");
+        openPortal(url);
     }
 }

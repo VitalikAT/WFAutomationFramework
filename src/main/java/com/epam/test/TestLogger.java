@@ -1,6 +1,5 @@
 package com.epam.test;
 
-import com.epam.utils.PropertiesLoader;
 import io.qameta.allure.Step;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
