@@ -8,11 +8,23 @@ import org.openqa.selenium.support.FindBy;
 
 public class MainPO extends BasePO {
 
-    @FindBy(xpath = "//a[@class='logo logoScaled']")
-    private Image mainLogo;
+    @FindBy(xpath = "//*[contains(@class, 'logo')]/a")
+    private Element mainLogo;
 
-    @FindBy(xpath = "//*[contains(@class, 'stb-MiniBar-Right')]")
-    private Element logoutLink;
+    @FindBy(xpath = "//*[contains(@id, 'wptAuthBar')]/a[1]")
+    private Element loginLink;
+
+    @FindBy(xpath = "//*[contains(@title, 'Home')]")
+    private Element homeMenuLink;
+
+    @FindBy(xpath = "//*[contains(@name, 'urlEntry')]/h2")
+    private Element homeMenuHeader;
+
+    @FindBy(xpath = "//*[contains(@title, 'About')]")
+    private Element aboutMenuLink;
+
+    @FindBy(xpath = "//*[contains(@class, 'translucent')]/h2")
+    private Element aboutHeader;
 
     public MainPO() {
         super();
@@ -36,8 +48,37 @@ public class MainPO extends BasePO {
         return this;
     }
 
-    public boolean isLogoutPresent() {
-        return logoutLink.isDisplayed();
+    public MainPO act_clickHomeMenuLink() {
+        clickOn(homeMenuLink);
+        return this;
     }
 
+    public MainPO act_clickAboutMenuLink() {
+        clickOn(aboutMenuLink);
+        return this;
+    }
+
+    public boolean isLoginPresent() {
+        return loginLink.isDisplayed();
+    }
+
+    public boolean isHomeMenuHeaderPresent() {
+        return homeMenuHeader.isDisplayed();
+    }
+
+    public boolean isAboutHeaderPresent() {
+        return loginLink.isDisplayed();
+    }
+
+    public String getMainLogoText() {
+        return mainLogo.getText();
+    }
+
+    public String getHomeMenuHeaderText() {
+        return homeMenuHeader.getText();
+    }
+
+    public String getAboutMenuHeaderText() {
+        return aboutHeader.getText();
+    }
 }
