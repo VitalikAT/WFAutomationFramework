@@ -4,7 +4,6 @@
     <!--<listeners>-->
         <!--<listener class-name="com.epam.test.TestListener" />-->
     <!--</listeners>-->
-    
     <test name="LoginTest">
         <classes>
             <class name="com.epam.login.LoginTest">
