@@ -36,7 +36,6 @@ wf-core-api/.allure/
 *.log
 
 # Package Files #
-*.jar
 *.war
 *.ear
 *.zip
