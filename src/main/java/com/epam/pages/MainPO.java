@@ -11,7 +11,7 @@ public class MainPO extends BasePO {
     @FindBy(xpath = "//*[contains(@class, 'logo')]/a")
     private Element mainLogo;
 
-    @FindBy(xpath = "//*[contains(@id, 'wptAuthBar')]/a[1]")
+    @FindBy(xpath = "//*[@class='page']/a[text()='Login']")
     private Element loginLink;
 
     @FindBy(xpath = "//*[contains(@title, 'Home')]")

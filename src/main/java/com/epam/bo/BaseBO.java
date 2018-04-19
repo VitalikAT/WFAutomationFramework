@@ -20,7 +20,7 @@ public abstract class BaseBO {
     public void openPortal(String url) {
         WebDriverManager.getUrl(url);
         try {
-            Thread.sleep(5000);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             error(e.getMessage());
         }
