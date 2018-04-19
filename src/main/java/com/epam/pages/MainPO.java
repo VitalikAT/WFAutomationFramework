@@ -32,7 +32,6 @@ public class MainPO extends BasePO {
 
     public MainPO waitForPageToBeReady() {
         JavascriptExecutor js = (JavascriptExecutor) WebDriverManager.getDriver();
-
         //This loop will rotate for 100 times to check If page Is ready after every 1 second.
         for (int i = 0; i < 400; i++) {
             try {

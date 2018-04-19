@@ -7,7 +7,8 @@
             <class name="com.epam.login.LoginTest">
                 <methods>
                     <include name="loginCheckMainPage"/>
-                    <include name="loginCheckMainPageQ"/>
+                    <include name="loginCheckMainPageTwo"/>
+                    <include name="loginCheckMainPageThree"/>
                 </methods>
             </class>
         </classes>
