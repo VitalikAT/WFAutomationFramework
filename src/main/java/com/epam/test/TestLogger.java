@@ -34,9 +34,20 @@ public class TestLogger {
                 .build();
         consoleAppender.start();
         config.addAppender(consoleAppender);
+//        FileAppender fileAppender = new FileAppender();
+//        fileAppender.setFile(String.format("%s/test-output/logs/%s/%s.log", System.getProperty("user.dir"), className, testName));
+//        fileAppender.setLayout(new PatternLayout("[%-5p] %d{HH:mm:ss} %c: %m%n"));
+//        fileAppender.setAppend(false);
+//        fileAppender.setName("FileAppender");
+//        fileAppender.setThreshold(Level.DEBUG);
+//        fileAppender.activateOptions();
+//        LOG.addAppender(fileAppender);
+
+
         Appender fileAppender = FileAppender.newBuilder()
                 .setConfiguration(config)
                 .withName("fileAppender")
+                .withAppend(false)
                 .withLayout(layout)
                 .withIgnoreExceptions(false)
                 .withFileName(String

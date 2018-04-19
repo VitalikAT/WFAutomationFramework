@@ -35,4 +35,40 @@ public class LoginTest extends BaseTestClass {
         step("Check Home Menu Header Text on Main page");
         Assert.assertEquals(mainBO.getHomeMenuHeaderText(), HOME_MENU_HEADER_TEXT, "Home Menu Header text is not equals on Main Page");
     }
+
+    @Test(description = "login Check Main Page")
+    public void loginCheckMainPageTwo() {
+        step("Open portal");
+        loginBO.openPortalLogin(PORTAL);
+        step("Verify if 'login' link has appeared on Main Page");
+        Assert.assertTrue(mainBO.isLoginPresent(), "'login' link has not appeared on Main Page");
+        step("Click on 'About' link on on Main page");
+        mainBO.act_clickOnAboutMenuLink();
+        Assert.assertTrue(mainBO.isAboutHeaderPresent(), "About Menu Header is not Present on Main Page");
+        step("Check About Menu Header Text on Main page");
+        Assert.assertEquals(mainBO.getAboutMenuHeaderText(), ABOUT_MENU_HEADER_TEXT, "About Menu Header text is not equals on Main Page");
+        step("Click on 'Home' link on on Main page");
+        mainBO.act_clickOnHomeMenuLink();
+        Assert.assertTrue(mainBO.isHomeMenuHeaderPresent(), "Home Menu Header is not Present on Main Page");
+        step("Check Home Menu Header Text on Main page");
+        Assert.assertEquals(mainBO.getHomeMenuHeaderText(), HOME_MENU_HEADER_TEXT, "Home Menu Header text is not equals on Main Page");
+    }
+
+    @Test(description = "login Check Main Page")
+    public void loginCheckMainPageThree() {
+        step("Open portal");
+        loginBO.openPortalLogin(PORTAL);
+        step("Verify if 'login' link has appeared on Main Page");
+        Assert.assertTrue(mainBO.isLoginPresent(), "'login' link has not appeared on Main Page");
+        step("Click on 'About' link on on Main page");
+        mainBO.act_clickOnAboutMenuLink();
+        Assert.assertTrue(mainBO.isAboutHeaderPresent(), "About Menu Header is not Present on Main Page");
+        step("Check About Menu Header Text on Main page");
+        Assert.assertEquals(mainBO.getAboutMenuHeaderText(), ABOUT_MENU_HEADER_TEXT, "About Menu Header text is not equals on Main Page");
+        step("Click on 'Home' link on on Main page");
+        mainBO.act_clickOnHomeMenuLink();
+        Assert.assertTrue(mainBO.isHomeMenuHeaderPresent(), "Home Menu Header is not Present on Main Page");
+        step("Check Home Menu Header Text on Main page");
+        Assert.assertEquals(mainBO.getHomeMenuHeaderText(), HOME_MENU_HEADER_TEXT, "Home Menu Header text is not equals on Main Page");
+    }
 }
