@@ -90,8 +90,7 @@ public class WaitManager {
             try {
                 if (isClickable(element)) {
                     return;
-                }
-                else{
+                } else {
                     Sleeper.SYSTEM_SLEEPER.sleep(new Duration(DURATION, DEFAULT_TIME_UNIT));
                 }
             } catch (InterruptedException e) {

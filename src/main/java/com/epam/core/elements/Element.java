@@ -30,11 +30,10 @@ public class Element implements IElement {
 
     @Override
     public void click() {
-        if(((RemoteWebDriver) WebDriverManager.getDriver()).getCapabilities().getBrowserName().toLowerCase().equals(Drivers.IE.getDriverValue())){
+        if (((RemoteWebDriver) WebDriverManager.getDriver()).getCapabilities().getBrowserName().toLowerCase().equals(Drivers.IE.getDriverValue())) {
             ((JavascriptExecutor) WebDriverManager.getDriver())
                     .executeScript("arguments[0].click();", getWebElement());
-        }
-        else
+        } else
             getWebElement().click();
     }
 

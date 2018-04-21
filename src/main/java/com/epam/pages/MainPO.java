@@ -2,7 +2,6 @@ package com.epam.pages;
 
 import com.epam.core.driver.WebDriverManager;
 import com.epam.core.elements.Element;
-import com.epam.core.elements.Image;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.FindBy;
 
