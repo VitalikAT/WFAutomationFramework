@@ -1,7 +1,6 @@
 package com.epam.pages;
 
 import com.epam.core.elements.Button;
-import com.epam.core.elements.Label;
 import com.epam.core.elements.TextBox;
 import org.openqa.selenium.support.FindBy;
 

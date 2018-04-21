@@ -3,7 +3,7 @@ package com.epam.utils;
 import java.io.IOException;
 import java.util.Properties;
 
-import static com.epam.constants.CommonConsts.*;
+import static com.epam.constants.CommonConsts.SUPER_USER;
 
 public class PropertiesLoader {
 
@@ -43,7 +43,7 @@ public class PropertiesLoader {
     }
 
     public String getLogin(String role) {
-        switch (role){
+        switch (role) {
             case SUPER_USER:
                 return properties.getProperty("login_superuser");
         }
@@ -56,7 +56,7 @@ public class PropertiesLoader {
     }
 
     public String getPassWord(String role) {
-        switch (role){
+        switch (role) {
             case SUPER_USER:
                 return properties.getProperty("password_superuser");
         }
@@ -67,6 +67,7 @@ public class PropertiesLoader {
     public String getLocalFilesDirectory() {
         return properties.getProperty("localDir");
     }
+
     public String getRemoteFilesDirectory() {
         return properties.getProperty("remoteDir");
     }

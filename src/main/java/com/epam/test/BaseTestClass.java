@@ -20,7 +20,8 @@ import java.lang.reflect.Method;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.epam.constants.CommonConsts.*;
+import static com.epam.constants.CommonConsts.ESCAPE_PROPERTY;
+import static com.epam.constants.CommonConsts.PATH_TO_CONFIGURATION_PROPERTIES;
 
 @Listeners(TestListener.class)
 public abstract class BaseTestClass {
@@ -45,10 +46,10 @@ public abstract class BaseTestClass {
     public void beforeMethod(Method method) {
         LOG = TestLogger.getLogger(method.getName(), method.getDeclaringClass().getSimpleName());
         createInstance();
-        if(method.isAnnotationPresent(AccessPoint.class)){
+        if (method.isAnnotationPresent(AccessPoint.class)) {
             String portal = method.getDeclaredAnnotation(AccessPoint.class).portal();
             String user_role = method.getDeclaredAnnotation(AccessPoint.class).credentials();
-            if(!portal.isEmpty() && !user_role.isEmpty()){
+            if (!portal.isEmpty() && !user_role.isEmpty()) {
                 LoginBO login = new LoginBO();
                 login
                         .loginWithValidCredentials(portal, new User(propertiesLoader.getLogin(user_role), propertiesLoader.getPassWord(user_role)))
