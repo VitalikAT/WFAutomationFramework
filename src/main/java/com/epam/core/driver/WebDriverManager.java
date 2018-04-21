@@ -33,6 +33,7 @@ public class WebDriverManager {
         LOG.info("Stopping browser.");
         removeDriverFromDriverPool();
         if (driver != null) {
+            driver.close();
             driver.quit();
         }
         LOG.info("Browser has been stopped.");
