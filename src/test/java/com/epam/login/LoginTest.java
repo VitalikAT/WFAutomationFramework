@@ -17,8 +17,8 @@ public class LoginTest extends BaseTestClass {
     private LoginBO loginBO;
     @Injector
     private MainBO mainBO;
-
-    @Test(description = "login Check Main Page")
+    //This method will be run a total of 5 times using 4 threads
+    @Test(description = "login Check Main Page", threadPoolSize = 4, invocationCount = 5,  timeOut = 1000)
     public void loginCheckMainPage() {
         step("Open portal");
         loginBO.openPortalLogin(PORTAL);
