@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -47,7 +48,7 @@ public class WebDriverFactory {
             case CHROME:
                 System.setProperty("webdriver.chrome.driver",
                         propertiesLoader.getChromeDriverPath());
-                WebDriver chrome = new ChromeDriver(getChromeCapabilities());
+                ChromeDriver chrome = new ChromeDriver(getChromeOptions());
                 chrome.manage().timeouts().implicitlyWait(propertiesLoader.getImplicitlyWaitTimeout(), TimeUnit.SECONDS);
                 chrome.manage().window().maximize();
                 return chrome;
@@ -55,7 +56,7 @@ public class WebDriverFactory {
             case IE:
                 System.setProperty("webdriver.ie.driver",
                         propertiesLoader.getInternetExplorerDriver_32Path());
-                WebDriver ieDriver = new InternetExplorerDriver(getInternetExplorerCapabilities());
+                WebDriver ieDriver = new InternetExplorerDriver(getInternetExplorerOptions());
                 ieDriver.manage().timeouts().implicitlyWait(propertiesLoader.getImplicitlyWaitTimeout(), TimeUnit.SECONDS);
                 ieDriver.manage().window().maximize();
                 return ieDriver;
@@ -71,9 +72,9 @@ public class WebDriverFactory {
                     e.printStackTrace();
                 }
                 if (setBrowserName.contains(Drivers.CHROME.getDriverValue())) {
-                    driver = new RemoteWebDriver(url, getChromeCapabilities());
+                    driver = new RemoteWebDriver(url, getChromeOptions());
                 } else {
-                    driver = new RemoteWebDriver(url, getInternetExplorerCapabilities());
+                    driver = new RemoteWebDriver(url, getInternetExplorerOptions());
                 }
                 driver.manage().timeouts().implicitlyWait(propertiesLoader.getImplicitlyWaitTimeout(), TimeUnit.SECONDS);
                 driver.manage().window().maximize();
@@ -82,24 +83,26 @@ public class WebDriverFactory {
         throw new RuntimeException("Unsupported driver type");
     }
 
-    private DesiredCapabilities getChromeCapabilities() {
+    private ChromeOptions getChromeOptions() {
         DesiredCapabilities chromeCapabilities = DesiredCapabilities.chrome();
         chromeCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
         chromeCapabilities.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR,
                 UnexpectedAlertBehaviour.ACCEPT);
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--no-sandbox");
-        chromeCapabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-        return chromeCapabilities;
+        chromeOptions.merge(chromeCapabilities);
+        return chromeOptions;
     }
 
-    private DesiredCapabilities getInternetExplorerCapabilities() {
+    private InternetExplorerOptions getInternetExplorerOptions() {
         DesiredCapabilities internetExplorerCapabilities = DesiredCapabilities.internetExplorer();
         internetExplorerCapabilities.setCapability("webdriver.ie.version", "11");
         internetExplorerCapabilities.setCapability("ignoreZoomSetting", true);
         internetExplorerCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
         internetExplorerCapabilities.setCapability("ignoreProtectedModeSettings", true);
-        return internetExplorerCapabilities;
+        InternetExplorerOptions internetExplorerOptions = new InternetExplorerOptions();
+        internetExplorerOptions.merge(internetExplorerCapabilities);
+        return internetExplorerOptions;
     }
 
     public String getHubURL() {
