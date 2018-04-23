@@ -1,6 +1,7 @@
 package com.epam.test;
 
 import io.qameta.allure.Step;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,6 +13,8 @@ import org.apache.logging.log4j.core.config.AppenderRef;
 import org.apache.logging.log4j.core.config.Configuration;
 import org.apache.logging.log4j.core.config.LoggerConfig;
 import org.apache.logging.log4j.core.layout.PatternLayout;
+
+import java.util.UUID;
 
 
 public class TestLogger {
@@ -49,9 +52,10 @@ public class TestLogger {
                 .createLogger(false, Level.DEBUG, "logger", "true", appenderRefs, null, config, null);
         loggerConfig.addAppender(consoleAppender, Level.INFO, config.getFilter());
         loggerConfig.addAppender(fileAppender, Level.DEBUG, config.getFilter());
-        config.addLogger("logger", loggerConfig);
+        String loggerName = "LoggerID: " + RandomStringUtils.randomAlphanumeric(7);
+        config.addLogger(loggerName, loggerConfig);
         context.updateLoggers(config);
-        LOG = context.getLogger("logger");
+        LOG = context.getLogger(loggerName);
 
     }
 
