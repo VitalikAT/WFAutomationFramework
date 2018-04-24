@@ -48,11 +48,11 @@ public class TestLogger {
         AppenderRef consoleAppenderRef = AppenderRef.createAppenderRef("consoleAppender", null, null);
         AppenderRef fileAppenderRef = AppenderRef.createAppenderRef("fileAppender", null, null);
         AppenderRef[] appenderRefs = new AppenderRef[]{consoleAppenderRef, fileAppenderRef};
+        String loggerName = "LoggerID: " + RandomStringUtils.randomAlphanumeric(7);
         LoggerConfig loggerConfig = LoggerConfig
-                .createLogger(false, Level.DEBUG, "logger", "true", appenderRefs, null, config, null);
+                .createLogger(false, Level.DEBUG, loggerName, "true", appenderRefs, null, config, null);
         loggerConfig.addAppender(consoleAppender, Level.INFO, config.getFilter());
         loggerConfig.addAppender(fileAppender, Level.DEBUG, config.getFilter());
-        String loggerName = "LoggerID: " + RandomStringUtils.randomAlphanumeric(7);
         config.addLogger(loggerName, loggerConfig);
         context.updateLoggers(config);
         LOG = context.getLogger(loggerName);
