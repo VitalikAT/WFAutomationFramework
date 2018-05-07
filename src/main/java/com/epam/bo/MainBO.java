@@ -2,6 +2,8 @@ package com.epam.bo;
 
 import com.epam.pages.MainPO;
 
+import static com.epam.test.MyLogHolder.info;
+
 public class MainBO extends BaseBO {
     private MainPO mainPO;
 

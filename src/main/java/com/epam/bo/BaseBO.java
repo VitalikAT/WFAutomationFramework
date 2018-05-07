@@ -3,14 +3,15 @@ package com.epam.bo;
 import com.epam.core.driver.WebDriverManager;
 import com.epam.core.elements.Element;
 import com.epam.pages.BasePO;
-import com.epam.test.TestLogger;
+import com.epam.test.MyLogHolder;
 import com.epam.utils.WaitManager;
 import org.openqa.selenium.WebElement;
+
+import static com.epam.test.MyLogHolder.info;
 
 public abstract class BaseBO {
 
     protected WaitManager waitManager = new WaitManager();
-    protected TestLogger LOG = TestLogger.getLogger();
     private BasePO basePO;
 
     public BaseBO() {
@@ -18,12 +19,8 @@ public abstract class BaseBO {
     }
 
     public void openPortal(String url) {
-        WebDriverManager.getUrl(url);
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            error(e.getMessage());
-        }
+        WebDriverManager.getInstance().getUrl(url);
+        WaitManager.waitForPageLoaded();
     }
 
     public BaseBO clickOn(Element element) {
@@ -41,17 +38,11 @@ public abstract class BaseBO {
         return this;
     }
 
-    public void error(String message) {
-        LOG.error(message);
+    public static void error(String message) {
+        MyLogHolder.error(message);
     }
 
-    public void step(String message) {
-        LOG.info(message);
+    public static void step(String message) {
+        info(message);
     }
-
-    public void info(String message) {
-        LOG.info(message);
-    }
-
-
 }

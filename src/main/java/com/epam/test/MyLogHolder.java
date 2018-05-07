@@ -14,13 +14,25 @@ import org.apache.logging.log4j.core.config.Configuration;
 import org.apache.logging.log4j.core.config.LoggerConfig;
 import org.apache.logging.log4j.core.layout.PatternLayout;
 
+public class MyLogHolder {
+    private static ThreadLocal<Logger> threadLocal = new ThreadLocal<>();
 
-public class TestLogger {
+    public static Logger getLoggerHolder(String testName, String className) {
+        if (threadLocal.get() == null) {
+            initLogger(testName, className);
+        }
+        return threadLocal.get();
+    }
 
-    private static TestLogger logger;
-    private Logger LOG;
+    private static Logger getLoggerFromPool() {
+        return threadLocal.get();
+    }
 
-    private TestLogger(String testName, String className) {
+    public static void removeLogger() {
+        threadLocal.remove();
+    }
+
+    private static void initLogger(String testName, String className) {
         LoggerContext context = (LoggerContext) LogManager.getContext(false);
         Configuration config = context.getConfiguration();
         PatternLayout layout = PatternLayout.newBuilder()
@@ -53,39 +65,20 @@ public class TestLogger {
         loggerConfig.addAppender(fileAppender, Level.DEBUG, config.getFilter());
         config.addLogger(loggerName, loggerConfig);
         context.updateLoggers(config);
-        LOG = context.getLogger(loggerName);
-
-    }
-
-    public static TestLogger getLogger(String testName, String className) {
-        if (logger == null) {
-            logger = new TestLogger(testName, className);
-        }
-        return logger;
-    }
-
-    public static TestLogger getLogger() {
-        if (logger == null) {
-            System.out.println("getLogger(name) is not executed, test name is not set up");
-        }
-        return logger;
+        Logger logger = context.getLogger(loggerName);
+        threadLocal.set(logger);
     }
 
     @Step("{0}")
-    public void info(Object message) {
-        LOG.info(message);
+    public static void info(Object message) {
+        getLoggerFromPool().info(message);
     }
 
-    public void debug(Object message) {
-        LOG.debug(message);
+    public static void debug(Object message) {
+        getLoggerFromPool().debug(message);
     }
 
-    public void error(String message) {
-        LOG.error(message);
-    }
-
-    public void drop() {
-        if (logger != null)
-            logger = null;
+    public static void error(String message) {
+        getLoggerFromPool().error(message);
     }
 }
