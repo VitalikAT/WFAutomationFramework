@@ -11,8 +11,6 @@ import org.openqa.selenium.support.ui.*;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
-import static com.epam.core.driver.WebDriverManager.getDriver;
-
 
 public class WaitManager {
     public static final int DEFAULT_TIME_OUT = 60;// Seconds
@@ -62,22 +60,22 @@ public class WaitManager {
     public static void waitForPageLoaded() {
         ExpectedCondition<Boolean> expectation = driver -> {
             if (driver != null) {
-                return WebDriverManager.executeScript("return document.readyState").toString().equals("complete");
+                return WebDriverManager.getInstance().executeScript("return document.readyState").toString().equals("complete");
             }
             throw new NullPointerException("Exception occurred while 'waitForPageLoaded', driver=null");
         };
 
-        WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+        WebDriverWait wait = new WebDriverWait(WebDriverManager.getInstance().getDriver(), 60);
         wait.until(expectation);
     }
 
     public static void waitForCondition(ExpectedCondition expectedCondition) {
-        WebDriverWait webDriverWait = new WebDriverWait(getDriver(), 60);
+        WebDriverWait webDriverWait = new WebDriverWait(WebDriverManager.getInstance().getDriver(), 60);
         webDriverWait.until(expectedCondition);
     }
 
     public static void waitTimeOut(int time) {
-        getDriver().manage().timeouts().implicitlyWait(time, TimeUnit.SECONDS);
+        WebDriverManager.getDriver().manage().timeouts().implicitlyWait(time, TimeUnit.SECONDS);
     }
 
     public <T extends WebElement> void untilClickable(T element) {
@@ -115,7 +113,7 @@ public class WaitManager {
     }
 
     public void waitElement(Element element) {
-        WebDriverWait waitDriver = new WebDriverWait(getDriver(), 30);
+        WebDriverWait waitDriver = new WebDriverWait(WebDriverManager.getInstance().getDriver(), 30);
         waitDriver.until(
                 ExpectedConditions.elementToBeClickable(element.getWebElement()));
     }

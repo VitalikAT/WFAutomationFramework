@@ -4,6 +4,7 @@ import com.epam.model.User;
 import com.epam.pages.LoginPO;
 import com.epam.pages.MainPO;
 
+import static com.epam.test.MyLogHolder.info;
 import static org.testng.Assert.assertTrue;
 
 public class LoginBO extends BaseBO {

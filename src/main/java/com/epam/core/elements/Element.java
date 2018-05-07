@@ -1,18 +1,15 @@
 package com.epam.core.elements;
 
-import com.epam.core.driver.WebDriverManager;
-import com.epam.enums.Drivers;
-import com.epam.test.TestLogger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.internal.Coordinates;
 import org.openqa.selenium.internal.Locatable;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.util.List;
 
+import static com.epam.test.MyLogHolder.debug;
+
 public class Element implements IElement {
     private WebElement webElement;
-    private TestLogger LOG = TestLogger.getLogger();
 
     public Element(WebElement webElement) {
         this.webElement = webElement;
@@ -24,16 +21,16 @@ public class Element implements IElement {
 
     @Override
     public void clear() {
-        LOG.debug("Clearing element with selector" + getSelector());
+        debug("Clearing element with selector" + getSelector());
         getWebElement().clear();
     }
 
     @Override
     public void click() {
-        if (((RemoteWebDriver) WebDriverManager.getDriver()).getCapabilities().getBrowserName().toLowerCase().equals(Drivers.IE.getDriverValue())) {
-            ((JavascriptExecutor) WebDriverManager.getDriver())
-                    .executeScript("arguments[0].click();", getWebElement());
-        } else
+//        if (((RemoteWebDriver) WebDriverManager.getDriver()).getCapabilities().getBrowserName().toLowerCase().equals(Drivers.IE.getDriverValue())) {
+//            ((JavascriptExecutor) WebDriverManager.getDriver())
+//                    .executeScript("arguments[0].click();", getWebElement());
+//        } else
             getWebElement().click();
     }
 
@@ -44,7 +41,7 @@ public class Element implements IElement {
 
     @Override
     public void sendKeys(String text) {
-        LOG.debug("Entering text: " + text + " to element with selector" + getSelector());
+        debug("Entering text: " + text + " to element with selector" + getSelector());
         getWebElement().sendKeys(text);
     }
 
