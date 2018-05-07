@@ -12,17 +12,16 @@ public class LoginTest extends BaseTestClass {
     //public class LoginTest extends TestBase {
     private static final String HOME_MENU_HEADER_TEXT = "Test a website's performance";
     private static final String ABOUT_MENU_HEADER_TEXT = "About WebPagetest.org";
-
-    //    @Injector
-    private LoginBO loginBO = new LoginBO();
-    //    @Injector
-    private MainBO mainBO = new MainBO();
+    private LoginBO loginBO;
+    private MainBO mainBO;
 
     //This method will be run a total of 5 times using 4 threads
 //    @Test(description = "login Check Main Page", threadPoolSize = 4, invocationCount = 4,  timeOut = 1000)
 //    @Test(description = "login Check Main Page", threadPoolSize = 4, invocationCount = 4)
     @Test(description = "login Check Main Page")
     public void loginCheckMainPage() {
+        loginBO = new LoginBO();
+        mainBO = new MainBO();
         step("Open portal");
         loginBO.openPortalLogin(PORTAL);
         step("Verify if 'login' link has appeared on Main Page");
@@ -39,8 +38,10 @@ public class LoginTest extends BaseTestClass {
         Assert.assertEquals(mainBO.getHomeMenuHeaderText(), HOME_MENU_HEADER_TEXT, "Home Menu Header text is not equals on Main Page");
     }
 
-    @Test(description = "login Check Main Page")
+    @Test(description = "login Check Main Page Two")
     public void loginCheckMainPageTwo() {
+        loginBO = new LoginBO();
+        mainBO = new MainBO();
         step("Open portal");
         loginBO.openPortalLogin(PORTAL);
         step("Verify if 'login' link has appeared on Main Page");
@@ -57,8 +58,10 @@ public class LoginTest extends BaseTestClass {
         Assert.assertEquals(mainBO.getHomeMenuHeaderText(), HOME_MENU_HEADER_TEXT, "Home Menu Header text is not equals on Main Page");
     }
 
-    @Test(description = "login Check Main Page")
+    @Test(description = "login Check Main Page Three")
     public void loginCheckMainPageThree() {
+        loginBO = new LoginBO();
+        mainBO = new MainBO();
         step("Open portal");
         loginBO.openPortalLogin(PORTAL);
         step("Verify if 'login' link has appeared on Main Page");
