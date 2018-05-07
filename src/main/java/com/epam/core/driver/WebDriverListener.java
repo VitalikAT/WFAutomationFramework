@@ -10,15 +10,14 @@ public class WebDriverListener implements IInvokedMethodListener {
     @Override
     public void beforeInvocation(IInvokedMethod iInvokedMethod, ITestResult iTestResult) {
         if (iInvokedMethod.isTestMethod()) {
-            WebDriver driver = new WebDriverFactory().getDriverInstance();
-            WebDriverManager.setWebDriver(driver);
+            TLDriverFactory.setDriver();
         }
     }
 
     @Override
     public void afterInvocation(IInvokedMethod iInvokedMethod, ITestResult iTestResult) {
         if (iInvokedMethod.isTestMethod()) {
-            WebDriver driver = WebDriverManager.getDriver();
+            WebDriver driver = TLDriverFactory.getDriver();
             if (driver != null) {
                 driver.close();
                 driver.quit();

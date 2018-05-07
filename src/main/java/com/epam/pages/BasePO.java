@@ -9,12 +9,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
 
+
 public class BasePO {
 
     protected WaitManager waitManager = new WaitManager();
 
     public BasePO() {
-        PageFactory.initElements(new FieldDecorator(WebDriverManager.getDriver()), this);
+        PageFactory.initElements(new FieldDecorator(WebDriverManager.getInstance().getDriver()), this);
     }
 
     public void clickOn(Element element) {

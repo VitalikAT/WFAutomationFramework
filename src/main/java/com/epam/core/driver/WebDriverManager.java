@@ -7,9 +7,24 @@ import org.testng.Reporter;
 
 public class WebDriverManager {
 
+    private static WebDriverManager instance;
+
+    private WebDriverManager() {
+    }
+
+    public static WebDriverManager getInstance() {
+        if (instance == null) {
+            synchronized (WebDriverManager.class) {
+                if (instance == null) {
+                    instance = new WebDriverManager();
+                }
+            }
+        }
+        return instance;
+    }
+
     private static WebDriverFactory webDriverFactory = new WebDriverFactory();
-//    private static ThreadLocal<WebDriver> webDriver = new ThreadLocal<>();
-    private static ThreadLocal<WebDriver> webDriver = new InheritableThreadLocal<>();
+    private static ThreadLocal<WebDriver> webDriver = new ThreadLocal<>();
 
     public static WebDriver getDriver() {
         if (webDriver.get() == null) {
@@ -18,18 +33,16 @@ public class WebDriverManager {
         return webDriver.get();
     }
 
-    public static void setWebDriver(WebDriver driver) {
-        webDriver.set(driver);
-    }
-
-    public static void setDriver() {
-        webDriver.set(webDriverFactory.getDriverInstance());
-//        driver = ThreadLocal.withInitial(() -> webDriverFactory.getDriverInstance());
+    private static void setDriver() {
+        webDriver = ThreadLocal.withInitial(() -> webDriverFactory.getDriverInstance());
     }
 
     public static void closeDriver() {
         webDriver.get().close();
         webDriver.get().quit();
+    }
+
+    public static void removeDriverFromDriverPool() {
         if (webDriver.get() != null) {
             webDriver.remove();
         }

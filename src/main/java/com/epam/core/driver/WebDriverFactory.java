@@ -90,6 +90,7 @@ public class WebDriverFactory {
                 UnexpectedAlertBehaviour.ACCEPT);
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--no-sandbox");
+        chromeOptions.addArguments("--disable-popup-blocking");
         chromeOptions.merge(chromeCapabilities);
         return chromeOptions;
     }

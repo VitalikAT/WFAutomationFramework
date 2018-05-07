@@ -1,11 +1,8 @@
 package com.epam.core.elements;
 
-import com.epam.core.driver.WebDriverManager;
-import com.epam.enums.Drivers;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.internal.Coordinates;
 import org.openqa.selenium.internal.Locatable;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.util.List;
 
@@ -30,10 +27,10 @@ public class Element implements IElement {
 
     @Override
     public void click() {
-        if (((RemoteWebDriver) WebDriverManager.getDriver()).getCapabilities().getBrowserName().toLowerCase().equals(Drivers.IE.getDriverValue())) {
-            ((JavascriptExecutor) WebDriverManager.getDriver())
-                    .executeScript("arguments[0].click();", getWebElement());
-        } else
+//        if (((RemoteWebDriver) WebDriverManager.getDriver()).getCapabilities().getBrowserName().toLowerCase().equals(Drivers.IE.getDriverValue())) {
+//            ((JavascriptExecutor) WebDriverManager.getDriver())
+//                    .executeScript("arguments[0].click();", getWebElement());
+//        } else
             getWebElement().click();
     }
 

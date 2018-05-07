@@ -1,6 +1,6 @@
 package com.epam.test;
 
-import com.epam.core.driver.WebDriverThreadLocal;
+import com.epam.core.driver.WebDriverManager;
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -17,7 +17,7 @@ import static com.epam.test.MyLogHolder.info;
 public class TestListener implements ITestListener {
     private String testName;
     private String className;
-    private static WebDriverThreadLocal webDriverThreadLocal = new WebDriverThreadLocal();
+
     @Override
     public void onTestStart(ITestResult iTestResult) {
         testName = iTestResult.getName().split(" ")[0];
@@ -64,7 +64,7 @@ public class TestListener implements ITestListener {
 
     @Attachment(value = "Page screenshot", type = "image/png")
     private byte[] captureScreenshot() {
-        return ((TakesScreenshot) webDriverThreadLocal.getDriver()).getScreenshotAs(OutputType.BYTES);
+        return ((TakesScreenshot) WebDriverManager.getInstance().getDriver()).getScreenshotAs(OutputType.BYTES);
     }
 
     @Attachment(value = "Log", type = "text/plain")

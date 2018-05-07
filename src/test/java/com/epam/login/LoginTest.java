@@ -2,7 +2,6 @@ package com.epam.login;
 
 import com.epam.bo.LoginBO;
 import com.epam.bo.MainBO;
-import com.epam.core.injector.Injector;
 import com.epam.test.BaseTestClass;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -10,13 +9,14 @@ import org.testng.annotations.Test;
 import static com.epam.constants.CommonConsts.PORTAL;
 
 public class LoginTest extends BaseTestClass {
+    //public class LoginTest extends TestBase {
     private static final String HOME_MENU_HEADER_TEXT = "Test a website's performance";
     private static final String ABOUT_MENU_HEADER_TEXT = "About WebPagetest.org";
 
-    @Injector
-    private LoginBO loginBO;
-    @Injector
-    private MainBO mainBO;
+    //    @Injector
+    private LoginBO loginBO = new LoginBO();
+    //    @Injector
+    private MainBO mainBO = new MainBO();
 
     //This method will be run a total of 5 times using 4 threads
 //    @Test(description = "login Check Main Page", threadPoolSize = 4, invocationCount = 4,  timeOut = 1000)
@@ -57,7 +57,7 @@ public class LoginTest extends BaseTestClass {
         Assert.assertEquals(mainBO.getHomeMenuHeaderText(), HOME_MENU_HEADER_TEXT, "Home Menu Header text is not equals on Main Page");
     }
 
-    @Test(description = "login Check Main Page")
+    //    @Test(description = "login Check Main Page")
     public void loginCheckMainPageThree() {
         step("Open portal");
         loginBO.openPortalLogin(PORTAL);

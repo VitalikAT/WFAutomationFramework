@@ -19,12 +19,8 @@ public abstract class BaseBO {
     }
 
     public void openPortal(String url) {
-        WebDriverManager.getUrl(url);
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            error(e.getMessage());
-        }
+        WebDriverManager.getInstance().getUrl(url);
+        WaitManager.waitForPageLoaded();
     }
 
     public BaseBO clickOn(Element element) {
