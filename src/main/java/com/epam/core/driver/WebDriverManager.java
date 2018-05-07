@@ -8,7 +8,8 @@ import org.testng.Reporter;
 public class WebDriverManager {
 
     private static WebDriverFactory webDriverFactory = new WebDriverFactory();
-    private static ThreadLocal<WebDriver> webDriver = new ThreadLocal<>();
+//    private static ThreadLocal<WebDriver> webDriver = new ThreadLocal<>();
+    private static ThreadLocal<WebDriver> webDriver = new InheritableThreadLocal<>();
 
     public static WebDriver getDriver() {
         if (webDriver.get() == null) {
@@ -29,7 +30,9 @@ public class WebDriverManager {
     public static void closeDriver() {
         webDriver.get().close();
         webDriver.get().quit();
-        webDriver.remove();
+        if (webDriver.get() != null) {
+            webDriver.remove();
+        }
     }
 
     public static void getUrl(String url) {

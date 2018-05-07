@@ -1,7 +1,5 @@
 package com.epam.test;
 
-import com.epam.core.driver.WebDriverManager;
-import com.epam.core.driver.WebDriverThreadLocal;
 import com.epam.core.injector.Injector;
 import com.epam.utils.PropertiesLoader;
 import com.epam.utils.WaitManager;
@@ -17,16 +15,16 @@ import java.lang.reflect.Method;
 
 import static com.epam.constants.CommonConsts.ESCAPE_PROPERTY;
 import static com.epam.constants.CommonConsts.PATH_TO_CONFIGURATION_PROPERTIES;
+import static com.epam.core.driver.WebDriverManager.closeDriver;
+import static com.epam.core.driver.WebDriverManager.setDriver;
 import static com.epam.test.MyLogHolder.removeLogger;
 
 @Listeners({TestListener.class})
 public abstract class BaseTestClass {
 
     protected WaitManager waitManager = new WaitManager();
-//    private static WebDriverThreadLocal webDriverThreadLocal = new WebDriverThreadLocal();
-    protected PropertiesLoader propertiesLoader = new PropertiesLoader(PATH_TO_CONFIGURATION_PROPERTIES);
-
-    protected Logger LOG;
+//    protected static PropertiesLoader propertiesLoader = new PropertiesLoader(PATH_TO_CONFIGURATION_PROPERTIES);
+    private Logger LOG;
 
     @BeforeClass
     public void browserInstantiate() {
@@ -40,13 +38,13 @@ public abstract class BaseTestClass {
     @BeforeMethod
     public void beforeMethod(Method method) {
         LOG = MyLogHolder.getLoggerHolder(method.getName(), method.getDeclaringClass().getSimpleName());
-        WebDriverManager.setDriver();
+        setDriver();
         createInstance();
     }
 
     @AfterMethod
     public void dropDriver() {
-        WebDriverManager.closeDriver();
+        closeDriver();
         removeLogger();
     }
 

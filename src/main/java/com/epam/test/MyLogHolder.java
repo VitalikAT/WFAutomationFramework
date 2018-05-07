@@ -1,6 +1,7 @@
 package com.epam.test;
 
 import io.qameta.allure.Step;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -57,13 +58,14 @@ public class MyLogHolder {
         AppenderRef consoleAppenderRef = AppenderRef.createAppenderRef("consoleAppender", null, null);
         AppenderRef fileAppenderRef = AppenderRef.createAppenderRef("fileAppender", null, null);
         AppenderRef[] appenderRefs = new AppenderRef[]{consoleAppenderRef, fileAppenderRef};
+        String loggerName = "LoggerID: " + RandomStringUtils.randomAlphanumeric(7);
         LoggerConfig loggerConfig = LoggerConfig
-                .createLogger(false, Level.DEBUG, "customLogger", "true", appenderRefs, null, config, null);
+                .createLogger(false, Level.DEBUG, loggerName, "true", appenderRefs, null, config, null);
         loggerConfig.addAppender(consoleAppender, Level.INFO, config.getFilter());
         loggerConfig.addAppender(fileAppender, Level.DEBUG, config.getFilter());
-        config.addLogger("customLogger", loggerConfig);
+        config.addLogger(loggerName, loggerConfig);
         context.updateLoggers(config);
-        Logger logger = context.getLogger("customLogger");
+        Logger logger = context.getLogger(loggerName);
         threadLocal.set(logger);
     }
 
