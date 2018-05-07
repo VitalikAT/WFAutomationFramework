@@ -75,7 +75,7 @@ public class WaitManager {
     }
 
     public static void waitTimeOut(int time) {
-        WebDriverManager.getDriver().manage().timeouts().implicitlyWait(time, TimeUnit.SECONDS);
+        WebDriverManager.getInstance().getDriver().manage().timeouts().implicitlyWait(time, TimeUnit.SECONDS);
     }
 
     public <T extends WebElement> void untilClickable(T element) {
@@ -127,7 +127,7 @@ public class WaitManager {
     }
 
     private void waitForPageToBeReady() {
-        JavascriptExecutor js = (JavascriptExecutor) WebDriverManager.getDriver();
+        JavascriptExecutor js = (JavascriptExecutor) WebDriverManager.getInstance().getDriver();
 
         //This loop will rotate for 100 times to check If page Is ready after every 1 second.
         //You can replace your if you wants to Increase or decrease wait time.

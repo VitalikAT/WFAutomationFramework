@@ -57,7 +57,7 @@ public class LoginTest extends BaseTestClass {
         Assert.assertEquals(mainBO.getHomeMenuHeaderText(), HOME_MENU_HEADER_TEXT, "Home Menu Header text is not equals on Main Page");
     }
 
-    //    @Test(description = "login Check Main Page")
+    @Test(description = "login Check Main Page")
     public void loginCheckMainPageThree() {
         step("Open portal");
         loginBO.openPortalLogin(PORTAL);

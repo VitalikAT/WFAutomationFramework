@@ -20,7 +20,6 @@ public abstract class BaseBO {
 
     public void openPortal(String url) {
         WebDriverManager.getInstance().getUrl(url);
-        WaitManager.waitForPageLoaded();
     }
 
     public BaseBO clickOn(Element element) {
