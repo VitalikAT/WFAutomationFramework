@@ -26,13 +26,13 @@ public class WebDriverManager {
 
 
     public WebDriver getDriver() {
-        if (webDriver.get() == null) {
-            setDriver();
-        }
+//        if (webDriver.get() == null) {
+//            setDriver();
+//        }
         return webDriver.get();
     }
 
-    private void setDriver() {
+    public void setDriver() {
         webDriver = ThreadLocal.withInitial(() -> webDriverFactory.getDriverInstance());
     }
 
