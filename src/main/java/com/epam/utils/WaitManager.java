@@ -1,6 +1,6 @@
 package com.epam.utils;
 
-import com.epam.core.driver.WebDriverManager;
+import com.epam.core.driver.TLDriverFactory;
 import com.epam.core.elements.Element;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -58,24 +58,19 @@ public class WaitManager {
     }
 
     public static void waitForPageLoaded() {
-        ExpectedCondition<Boolean> expectation = driver -> {
-            if (driver != null) {
-                return WebDriverManager.getInstance().executeScript("return document.readyState").toString().equals("complete");
-            }
-            throw new NullPointerException("Exception occurred while 'waitForPageLoaded', driver=null");
-        };
+        ExpectedCondition<Boolean> expectation = driver -> TLDriverFactory.executeScript("return document.readyState").toString().equals("complete");
 
-        WebDriverWait wait = new WebDriverWait(WebDriverManager.getInstance().getDriver(), 60);
+        WebDriverWait wait = new WebDriverWait(TLDriverFactory.getDriver(), 60);
         wait.until(expectation);
     }
 
     public static void waitForCondition(ExpectedCondition expectedCondition) {
-        WebDriverWait webDriverWait = new WebDriverWait(WebDriverManager.getInstance().getDriver(), 60);
+        WebDriverWait webDriverWait = new WebDriverWait(TLDriverFactory.getDriver(), 60);
         webDriverWait.until(expectedCondition);
     }
 
     public static void waitTimeOut(int time) {
-        WebDriverManager.getInstance().getDriver().manage().timeouts().implicitlyWait(time, TimeUnit.SECONDS);
+        TLDriverFactory.getDriver().manage().timeouts().implicitlyWait(time, TimeUnit.SECONDS);
     }
 
     public <T extends WebElement> void untilClickable(T element) {
@@ -113,7 +108,7 @@ public class WaitManager {
     }
 
     public void waitElement(Element element) {
-        WebDriverWait waitDriver = new WebDriverWait(WebDriverManager.getInstance().getDriver(), 30);
+        WebDriverWait waitDriver = new WebDriverWait(TLDriverFactory.getDriver(), 30);
         waitDriver.until(
                 ExpectedConditions.elementToBeClickable(element.getWebElement()));
     }
@@ -127,7 +122,7 @@ public class WaitManager {
     }
 
     private void waitForPageToBeReady() {
-        JavascriptExecutor js = (JavascriptExecutor) WebDriverManager.getInstance().getDriver();
+        JavascriptExecutor js = (JavascriptExecutor) TLDriverFactory.getDriver();
 
         //This loop will rotate for 100 times to check If page Is ready after every 1 second.
         //You can replace your if you wants to Increase or decrease wait time.

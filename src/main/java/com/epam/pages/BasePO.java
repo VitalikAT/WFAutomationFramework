@@ -1,6 +1,6 @@
 package com.epam.pages;
 
-import com.epam.core.driver.WebDriverManager;
+import com.epam.core.driver.TLDriverFactory;
 import com.epam.core.elements.Element;
 import com.epam.core.elements.FieldDecorator;
 import com.epam.test.MyLogHolder;
@@ -15,7 +15,7 @@ public class BasePO {
     protected WaitManager waitManager = new WaitManager();
 
     public BasePO() {
-        PageFactory.initElements(new FieldDecorator(WebDriverManager.getInstance().getDriver()), this);
+        PageFactory.initElements(new FieldDecorator(TLDriverFactory.getDriver()), this);
     }
 
     public void clickOn(Element element) {

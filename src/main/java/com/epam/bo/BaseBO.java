@@ -1,6 +1,6 @@
 package com.epam.bo;
 
-import com.epam.core.driver.WebDriverManager;
+import com.epam.core.driver.TLDriverFactory;
 import com.epam.core.elements.Element;
 import com.epam.pages.BasePO;
 import com.epam.test.MyLogHolder;
@@ -19,7 +19,7 @@ public abstract class BaseBO {
     }
 
     public void openPortal(String url) {
-        WebDriverManager.getInstance().getUrl(url);
+        TLDriverFactory.getUrl(url);
     }
 
     public BaseBO clickOn(Element element) {

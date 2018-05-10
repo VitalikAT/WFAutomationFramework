@@ -5,6 +5,7 @@ import com.epam.pages.LoginPO;
 import com.epam.pages.MainPO;
 
 import static com.epam.test.MyLogHolder.info;
+import static com.epam.utils.WaitManager.waitForPageLoaded;
 import static org.testng.Assert.assertTrue;
 
 public class LoginBO extends BaseBO {
@@ -50,5 +51,6 @@ public class LoginBO extends BaseBO {
     public void openPortalLogin(String url) {
         info("Open portal on Main page");
         openPortal(url);
+        waitForPageLoaded();
     }
 }

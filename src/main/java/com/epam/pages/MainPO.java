@@ -1,6 +1,6 @@
 package com.epam.pages;
 
-import com.epam.core.driver.WebDriverManager;
+import com.epam.core.driver.TLDriverFactory;
 import com.epam.core.elements.Element;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.FindBy;
@@ -30,7 +30,7 @@ public class MainPO extends BasePO {
     }
 
     public MainPO waitForPageToBeReady() {
-        JavascriptExecutor js = (JavascriptExecutor) WebDriverManager.getInstance().getDriver();
+        JavascriptExecutor js = (JavascriptExecutor) TLDriverFactory.getDriver();
         //This loop will rotate for 100 times to check If page Is ready after every 1 second.
         for (int i = 0; i < 400; i++) {
             try {

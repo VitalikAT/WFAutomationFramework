@@ -3,13 +3,14 @@ package com.epam.login;
 import com.epam.bo.LoginBO;
 import com.epam.bo.MainBO;
 import com.epam.core.injector.Injector;
-import com.epam.test.BaseTestClass;
+//import com.epam.test.BaseTestClass;
+import com.epam.test.TestBase;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static com.epam.constants.CommonConsts.PORTAL;
 
-public class LoginTest extends BaseTestClass {
+public class LoginTest extends TestBase {
     private static final String HOME_MENU_HEADER_TEXT = "Test a website's performance";
     private static final String ABOUT_MENU_HEADER_TEXT = "About WebPagetest.org";
 

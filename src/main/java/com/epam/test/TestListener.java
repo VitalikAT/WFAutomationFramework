@@ -1,6 +1,6 @@
 package com.epam.test;
 
-import com.epam.core.driver.WebDriverManager;
+import com.epam.core.driver.TLDriverFactory;
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -64,7 +64,7 @@ public class TestListener implements ITestListener {
 
     @Attachment(value = "Page screenshot", type = "image/png")
     private byte[] captureScreenshot() {
-        return ((TakesScreenshot) WebDriverManager.getInstance().getDriver()).getScreenshotAs(OutputType.BYTES);
+        return ((TakesScreenshot) TLDriverFactory.getDriver()).getScreenshotAs(OutputType.BYTES);
     }
 
     @Attachment(value = "Log", type = "text/plain")
