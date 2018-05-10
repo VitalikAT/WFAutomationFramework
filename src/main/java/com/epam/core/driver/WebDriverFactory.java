@@ -92,6 +92,7 @@ public class WebDriverFactory {
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--no-sandbox");
         chromeOptions.addArguments("--disable-popup-blocking");
+//        chromeOptions.addArguments("headless");
         chromeOptions.merge(chromeCapabilities);
         return chromeOptions;
     }
