@@ -4,7 +4,7 @@
 
     <test name="LoginTest" parallel="methods" thread-count="3">
         <classes>
-            <class name="com.epam.login.LoginTest">
+            <class name="com.runner.login.LoginTest">
                 <methods>
                     <include name="loginCheckMainPage"/>
                     <include name="loginCheckMainPageTwo"/>
